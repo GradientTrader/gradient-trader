@@ -14,7 +14,9 @@ class Coin:
             raise Exception("Bad coin name!")
         self.coin_name = coin_name
         self.series = pd.read_csv("%s/cryptocurrencypricehistory/%s_price.csv" % (os.path.dirname(os.path.abspath(__file__)), self.coin_name), parse_dates=["Date"])
-        self.series.index = self.series.sort_values(by=["Date"]).index ## reorder so that date increases
+        ## reorder so that date increases
+        self.series.index = self.series.sort_values(by=["Date"]).index
+        self.series = self.series.sort_index()
         self.length = len(self.series.index)
         self.current_index = 0
         
